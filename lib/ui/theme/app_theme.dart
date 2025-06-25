@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class AppTheme {
   static const Color primary = Color(0xFF1E1E1E);
   static const Color secondary = Color(0xFF363636);
-  static const Color disabled = Color(0xffC2CCC6);
+  static const Color disabled = Color(0xFF373837);
   static const Color grey = Color(0xFF686868);
   static const Color opaqueWhite = Color(0xFFD9D9D9);
 

@@ -7,6 +7,7 @@ import 'package:loteria_app/ui/bloc/navigation/navigation_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:loteria_app/ui/router/router.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
+import 'package:loteria_app/ui/utils/dimention_size.dart';
 
 var logger = LoggerOutput().logger;
 
@@ -26,15 +27,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => serviceLocator<NavigationBloc>()),
-      ],
-      child: MaterialApp.router(
-          title: 'LoteriaApp',
-          theme: AppTheme.darkTheme(context),
-          routerConfig: router,
-        ),
+    DimentionSize.init(context);
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        DimentionSize.isInitialized = false;
+        DimentionSize.init(context);
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => serviceLocator<NavigationBloc>()),
+          ],
+          child: MaterialApp.router(
+              title: 'LoteriaApp',
+              theme: AppTheme.darkTheme(context),
+              routerConfig: router,
+            ),
+        );
+      }
     );
   }
 }
