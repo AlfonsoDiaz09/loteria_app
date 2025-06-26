@@ -29,9 +29,12 @@ class BottomAppbarSection extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     controller.reset();
+                    context.read<TimerBloc>().add(ResetTimer(status: StatusTimer.initial));
                   },
                   child: Icon(
-                    Icons.replay_rounded,
+                    status == StatusTimer.initial
+                      ? Icons.flip_camera_android_rounded
+                      : Icons.replay_rounded,
                     size: DimentionSize.width(24)),
                 ),
                 Icon(
