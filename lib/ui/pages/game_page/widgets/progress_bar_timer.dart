@@ -47,6 +47,19 @@ class _ProgressBarTimerState extends State<ProgressBarTimer> with SingleTickerPr
   }
 
   @override
+  void didUpdateWidget(covariant ProgressBarTimer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    final newDuration = Duration(seconds: context.read<TimerBloc>().state.duration!);
+    if (_animationController.duration != newDuration &&
+        _animationController.isAnimating) {
+      final percentComplete = _animationController.value;
+      _animationController.duration = newDuration;
+      _animationController.forward(from: percentComplete);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<TimerBloc, TimerState>(
       builder: (context, state) {

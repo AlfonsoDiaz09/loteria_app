@@ -18,6 +18,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState>{
         // TODO: Crear modelo y recuperar la duración
         duration = 5;
         print("duration: $duration");
+      } else {
+        duration = (duration < 60) ? duration + 1 : 1;
       }
       emit(state.copyWith(duration: duration));
     });

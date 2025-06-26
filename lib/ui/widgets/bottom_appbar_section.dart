@@ -73,10 +73,15 @@ class BottomAppbarSection extends StatelessWidget {
                       size: DimentionSize.width(32),
                       color: Colors.black)),
                 ),
-                Text(
-                  '03s',
-                  style: TextStyle(
-                    fontSize: DimentionSize.width(14))),
+                InkWell(
+                  onTap: () {
+                    context.read<TimerBloc>().add(UpdateDuration(duration: state.duration));
+                  },
+                  child: Text(
+                    '${state.duration.toString().padLeft(2, '0')}s',
+                    style: TextStyle(
+                      fontSize: DimentionSize.width(14))),
+                ),
                 Icon(
                   Icons.settings_rounded,
                   size: DimentionSize.width(24)),
