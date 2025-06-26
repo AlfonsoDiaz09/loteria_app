@@ -16,19 +16,19 @@ class CardLoteria extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.secondary,
         borderRadius: BorderRadius.circular(
-          DimentionSize.width(20))
+          DimentionSize.width(isSmallCard ? 5 : 20))
       ),
       padding: EdgeInsets.symmetric(
         horizontal: DimentionSize.width(
-          isSmallCard ? 7 : 27),
+          isSmallCard ? 8 : 27),
         vertical: DimentionSize.height(
-          isSmallCard ? 7 : 27)),
+          isSmallCard ? 7 : 22)),
       child: SvgPicture.asset(
         'assets/img/card_diamond.svg',
         width: DimentionSize.width(
-          isSmallCard ? 40 : 153),
+          isSmallCard ? 40 : 143),
         height: DimentionSize.height(
-          isSmallCard ? 64 : 246)),
+          isSmallCard ? 64 : 236)),
     );
   }
 }

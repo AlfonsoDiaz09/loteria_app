@@ -7,41 +7,45 @@ class BottomAppbarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isPlaying = false;
+    final bool isPlaying = true;
     return BottomAppBar(
-      height: DimentionSize.height(41),
+      height: DimentionSize.height(53),
       surfaceTintColor: AppTheme.secondary,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Icon(
-            Icons.replay_rounded,
-            size: DimentionSize.width(24)),
-          Icon(
-            Icons.record_voice_over_sharp,
-            size: DimentionSize.width(24),
-            color: AppTheme.disabled),
-          Container(
-            decoration: BoxDecoration(
-              color: AppTheme.opaqueWhite,
-              borderRadius: BorderRadius.circular(8)),
-            padding: EdgeInsets.symmetric(
-              horizontal: 4,
-              vertical: 3),
-            child: Icon(
-              isPlaying 
-              ? Icons.pause_rounded
-              : Icons.play_arrow_rounded,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: DimentionSize.width(5)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              Icons.replay_rounded,
+              size: DimentionSize.width(24)),
+            Icon(
+              Icons.record_voice_over_sharp,
               size: DimentionSize.width(24),
-              color: Colors.black)),
-          Text(
-            '03s',
-            style: TextStyle(
-              fontSize: DimentionSize.width(14))),
-          Icon(
-            Icons.settings_rounded,
-            size: DimentionSize.width(24)),
-        ],
+              color: AppTheme.disabled),
+            Container(
+              decoration: BoxDecoration(
+                color: AppTheme.opaqueWhite,
+                borderRadius: BorderRadius.circular(15)),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 9),
+              child: Icon(
+                isPlaying 
+                ? Icons.pause_rounded
+                : Icons.play_arrow_rounded,
+                size: DimentionSize.width(32),
+                color: Colors.black)),
+            Text(
+              '03s',
+              style: TextStyle(
+                fontSize: DimentionSize.width(14))),
+            Icon(
+              Icons.settings_rounded,
+              size: DimentionSize.width(24)),
+          ],
+        ),
       ),
     );
   }
