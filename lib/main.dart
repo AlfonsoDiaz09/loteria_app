@@ -6,6 +6,7 @@ import 'package:loteria_app/core/constants/api_settings.dart';
 import 'package:loteria_app/core/logs/logger_output.dart';
 import 'package:loteria_app/core/manager/client_manager.dart';
 import 'package:loteria_app/init_dependencies.dart';
+import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
 import 'package:loteria_app/ui/bloc/navigation/navigation_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (_) => serviceLocator<NavigationBloc>()),
             BlocProvider(create: (_) => serviceLocator<TimerBloc>()),
             BlocProvider(create: (_) => serviceLocator<SetBloc>()),
+            BlocProvider(create: (_) => serviceLocator<DeckBloc>()),
           ],
           child: MaterialApp.router(
               title: 'LoteriaApp',

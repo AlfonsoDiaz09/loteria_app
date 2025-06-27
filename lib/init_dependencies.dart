@@ -8,6 +8,7 @@ import 'package:loteria_app/domain/set_cards/repositories/card_api_repository.da
 import 'package:loteria_app/domain/set_cards/repositories/set_api_repository.dart';
 import 'package:loteria_app/domain/set_cards/usecases/obtener_cards.dart';
 import 'package:loteria_app/domain/set_cards/usecases/obtener_default_sets.dart';
+import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
 import 'package:loteria_app/ui/bloc/navigation/navigation_bloc.dart';
 import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
 import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
