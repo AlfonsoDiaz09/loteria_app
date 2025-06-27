@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/main.dart';
+import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
 import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/card_loteria.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/passed_cards.dart';
@@ -23,6 +24,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     context.read<TimerBloc>().add(UpdateDuration());
+    context.read<SetBloc>().add(SearchSets());
     super.initState();
   }
 
