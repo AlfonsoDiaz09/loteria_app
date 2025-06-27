@@ -16,6 +16,9 @@ class ObtenerDefaultSets implements UseCase<List<CardSetLocal>, NoParams> {
   @override
   Future<Either<Failure, List<CardSetLocal>>> call(NoParams params) async {
     final resSet = await setApiRepository.obtenerDefaultSets();
+    if (resSet.isLeft()) {
+      return left(Failure(resSet.getLeft().toNullable()!.message));
+    }
     final List<SetModel> sets = resSet.getRight().toNullable()!;
     final List<CardSetLocal> groupsLocals = [];
     for (var set in sets) {

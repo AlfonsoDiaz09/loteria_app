@@ -52,10 +52,12 @@ class _GamePageState extends State<GamePage> {
                         builder: (context, state) {
                           return state.visibleDeck.isEmpty
                             ? const Center(child: Text('Sin cartas'))
-                            : CardsInPlay(
-                                cards: state.visibleDeck,
-                                onCardPlayed: () => context.read<DeckBloc>()
-                                    .add(PlayTopCard()));
+                            : Expanded(
+                              child: CardsInPlay(
+                                  cards: state.visibleDeck,
+                                  onCardPlayed: () => context.read<DeckBloc>()
+                                      .add(PlayTopCard())),
+                            );
                         }
                       );
                     }
