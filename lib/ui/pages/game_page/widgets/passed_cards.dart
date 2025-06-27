@@ -12,14 +12,14 @@ class PassedCards extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         horizontal: DimentionSize.width(7),
         vertical: DimentionSize.height(10)),
-      height: DimentionSize.height(78),
+      height: DimentionSize.height(58),
       child: Stack(
         children: [
           ListView.separated(
             itemCount: 0,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return CardLoteria(isSmallCard: true);
+              return CardLoteria(isSmallCard: true, imageUrl: '');
             },
             separatorBuilder: (context, index) => SizedBox(
               width: DimentionSize.width(10))),

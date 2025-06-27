@@ -25,7 +25,7 @@ class SetBloc  extends Bloc<SetEvent, SetState> {
         logger.e(res.getLeft().toNullable()!.message);
       }
       final List<CardSetLocal> sets = res.getRight().toNullable()!;
-      logger.i("Sets obtenidos: ${sets[0].cards[0].imageUrl}");
+      emit(SetCargado(cardSetLocal: sets[0]));
     });
   }
 }
