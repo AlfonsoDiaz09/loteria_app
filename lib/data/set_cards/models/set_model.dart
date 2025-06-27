@@ -1,16 +1,22 @@
 import 'dart:convert';
 
-import 'package:loteria_app/domain/set_cards/entities/set_entity.dart';
+import 'package:loteria_app/core/utils/bool_utils.dart';
 
 List<SetModel> setModelFromJson(String str) => List<SetModel>.from(json.decode(str).map((x) => SetModel.fromJson(x)));
 
-class SetModel extends SetEntity {
+class SetModel {
+  final String id;
+  final String name;
+  final String description;
+  final String? sesionId;
+  final bool isDefault;
+
   SetModel({
-    required super.id,
-    required super.name,
-    required super.description,
-    String? sesionId,
-    required super.isDefault,
+    required this.id,
+    required this.name,
+    required this.description,
+    this.sesionId,
+    required this.isDefault,
   });
 
   factory SetModel.fromJson(Map<String, dynamic> json) => 
@@ -19,12 +25,12 @@ class SetModel extends SetEntity {
       name: json['name'],
       description: json['description'],
       sesionId: json['sesion_id'],
-      isDefault: json['is_default']);
+      isDefault: BoolUtils().fromJson(json['is_default']));
 
   Map<String,dynamic> toJson() => {
     "id":id,
     "name": name,
     "description": description,
-    "sesionId": sesionId,
-    "isDefault": isDefault};
+    "sesion_id": sesionId,
+    "is_default": isDefault ? 1 : 0};
 }

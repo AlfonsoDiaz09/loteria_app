@@ -8,7 +8,7 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton<http.Client>(() => http.Client());
   serviceLocator.registerLazySingleton<ClientManager>(() => ClientManager.instance);
   _initApp();
-  _initSets();
+  _initSetCards();
 }
 
 void _initApp(){
@@ -16,12 +16,14 @@ void _initApp(){
   serviceLocator.registerLazySingleton(() => TimerBloc());
 }
 
-void _initSets(){
+void _initSetCards(){
   serviceLocator
     //Repositories
     ..registerFactory<SetApiRepository>(() => SetApiRepositoryImpl(client: serviceLocator(), apiSettings: serviceLocator()))
+    ..registerFactory<CardApiRepository>(() => CardApiRepositoryImpl(apiSettings: serviceLocator(), client: serviceLocator()))
     //Usecase
-    ..registerFactory(() => ObtenerSets(setApiRepository: serviceLocator()))
+    ..registerFactory(() => ObtenerDefaultSets(setApiRepository: serviceLocator(), cardApiRepository: serviceLocator()))
+    ..registerFactory(() => ObtenerCards(cardApiRepository: serviceLocator()))
     //Bloc
-    ..registerLazySingleton(() => SetBloc(obtenerSets: serviceLocator()));
+    ..registerLazySingleton(() => SetBloc(obtenerDefaultSets: serviceLocator()));
 }

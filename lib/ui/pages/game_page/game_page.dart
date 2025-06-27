@@ -24,7 +24,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     context.read<TimerBloc>().add(UpdateDuration());
-    context.read<SetBloc>().add(SearchSets());
+    context.read<SetBloc>().add(SearchDefaultSets());
     super.initState();
   }
 
