@@ -31,11 +31,13 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
       final full = state.fullDeck;
       final played = state.cardsPlayed;
 
-      if (current.isEmpty || played >= full.length) return;
+      played.add(current[0]);
+
+      if (current.isEmpty || played.length >= full.length) return;
 
       current.removeAt(0);
 
-      final nextIndex = played + visibleLimit;
+      final nextIndex = played.length + visibleLimit;
 
       if (nextIndex < full.length) {
         current.add(full[nextIndex]);
@@ -45,7 +47,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
         state.copyWith(
         visibleDeck: current,
         isEmpty: current.isEmpty,
-        cardsPlayed: played + 1));
+        cardsPlayed: played));
     });
   }
 }

@@ -18,12 +18,13 @@ class CardLoteria extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppTheme.secondary,
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.grey,
-            offset: Offset(0, 1)
-          )
-        ],
+        boxShadow: isSmallCard
+          ? []
+          : [
+              BoxShadow(
+                color: AppTheme.grey,
+                offset: Offset(0, 1)
+              )],
         border: Border(
           bottom: BorderSide(
             color: AppTheme.secondary

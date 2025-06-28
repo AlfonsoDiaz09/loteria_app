@@ -4,7 +4,7 @@ class DeckState {
   final List<CardModel> fullDeck;
   final List<CardModel> visibleDeck;
   final bool isEmpty;
-  final int cardsPlayed;
+  final List<CardModel> cardsPlayed;
 
   const DeckState({
     required this.fullDeck,
@@ -17,7 +17,7 @@ class DeckState {
     List<CardModel>? fullDeck,
     List<CardModel>? visibleDeck,
     bool? isEmpty,
-    int? cardsPlayed,
+    List<CardModel>? cardsPlayed,
   }) {
     return DeckState(
       fullDeck: fullDeck ?? this.fullDeck,
@@ -28,5 +28,5 @@ class DeckState {
   }
 
   static DeckState initial() => DeckState(
-    fullDeck: [], visibleDeck: [], isEmpty: true, cardsPlayed: 0);
+    fullDeck: [], visibleDeck: [], isEmpty: true, cardsPlayed: []);
 }
