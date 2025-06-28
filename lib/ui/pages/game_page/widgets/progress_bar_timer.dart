@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/main.dart';
+import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
 import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
 import 'package:loteria_app/ui/utils/enums.dart';
@@ -33,7 +34,13 @@ class _ProgressBarTimerState extends State<ProgressBarTimer> with SingleTickerPr
 
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
+        final statusDeckBloc = context.read<DeckBloc>().state;
+        context.read<DeckBloc>().add(PlayTopCard());
         context.read<TimerBloc>().add(CompleteTimer(status: StatusTimer.completed));
+        if (statusDeckBloc.visibleDeck.isNotEmpty) {
+          widget.controller.start();
+          context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
+        } 
       }
     });
 
