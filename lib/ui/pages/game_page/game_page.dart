@@ -44,11 +44,16 @@ class _GamePageState extends State<GamePage> {
                 children: [
                   PassedCards(),
                   Expanded(
-                    child: BlocBuilder<SetBloc, SetState>(
+                    child: BlocConsumer<SetBloc, SetState>(
+                      listenWhen: (_, current) => current is SetCargado,
+                      listener: (context, state) {
+                        final setState = state as SetCargado;
+                        context.read<DeckBloc>().add(
+                          InitializeDeck(cards: setState.cardSetLocal.cards),
+                        );
+                      },
                       builder: (context, stateSet) {
                         if (stateSet is! SetCargado) return SizedBox.shrink();
-                        context.read<DeckBloc>().add(InitializeDeck(
-                            cards: stateSet.cardSetLocal.cards));
                         return BlocBuilder<DeckBloc, DeckState>(
                           builder: (context, state) {
                             return state.visibleDeck.isEmpty
