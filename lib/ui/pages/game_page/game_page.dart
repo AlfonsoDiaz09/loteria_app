@@ -43,24 +43,24 @@ class _GamePageState extends State<GamePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PassedCards(),
-                  BlocBuilder<SetBloc, SetState>(
-                    builder: (context, stateSet) {
-                      if (stateSet is! SetCargado) return SizedBox.shrink();
-                      context.read<DeckBloc>().add(InitializeDeck(
-                          cards: stateSet.cardSetLocal.cards));
-                      return BlocBuilder<DeckBloc, DeckState>(
-                        builder: (context, state) {
-                          return state.visibleDeck.isEmpty
-                            ? const Center(child: Text('Sin cartas'))
-                            : Expanded(
-                              child: CardsInPlay(
+                  Expanded(
+                    child: BlocBuilder<SetBloc, SetState>(
+                      builder: (context, stateSet) {
+                        if (stateSet is! SetCargado) return SizedBox.shrink();
+                        context.read<DeckBloc>().add(InitializeDeck(
+                            cards: stateSet.cardSetLocal.cards));
+                        return BlocBuilder<DeckBloc, DeckState>(
+                          builder: (context, state) {
+                            return state.visibleDeck.isEmpty
+                              ? const Center(child: Text('Sin cartas'))
+                              : CardsInPlay(
                                   cards: state.visibleDeck,
                                   onCardPlayed: () => context.read<DeckBloc>()
-                                      .add(PlayTopCard())),
-                            );
-                        }
-                      );
-                    }
+                                      .add(PlayTopCard()));
+                          }
+                        );
+                      }
+                    ),
                   ),
                   Align(
                     alignment: Alignment.bottomLeft,
