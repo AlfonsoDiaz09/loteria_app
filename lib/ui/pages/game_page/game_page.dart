@@ -9,6 +9,8 @@ import 'package:loteria_app/ui/pages/game_page/widgets/cards_in_play.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/passed_cards.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/progress_bar_timer.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
+import 'package:loteria_app/ui/utils/animated_out_controller.dart';
+import 'package:loteria_app/ui/utils/enums.dart';
 import 'package:loteria_app/ui/utils/progress_bar_controller.dart';
 import 'package:loteria_app/ui/widgets/bottom_appbar_section.dart';
 
@@ -21,6 +23,7 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   final ProgressBarController _progressController = ProgressBarController();
+  final AnimatedOutController _animatedOutController = AnimatedOutController();
   
   @override
   void initState() {
@@ -59,9 +62,14 @@ class _GamePageState extends State<GamePage> {
                             return state.visibleDeck.isEmpty
                               ? const Center(child: Text('Sin cartas'))
                               : CardsInPlay(
+                                  controller: _animatedOutController,
                                   cards: state.visibleDeck,
                                   onCardPlayed: () => context.read<DeckBloc>()
-                                      .add(PlayTopCard()));
+                                      .add(PlayTopCard()),
+                                  onAnimationFinished: () {
+                                    context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
+                                    _progressController.start();
+                                  });
                           }
                         );
                       }
@@ -69,7 +77,9 @@ class _GamePageState extends State<GamePage> {
                   ),
                   Align(
                     alignment: Alignment.bottomLeft,
-                    child: ProgressBarTimer(controller: _progressController))
+                    child: ProgressBarTimer(
+                      progressController: _progressController,
+                      animatedOutController: _animatedOutController))
                 ]
               );
             }
