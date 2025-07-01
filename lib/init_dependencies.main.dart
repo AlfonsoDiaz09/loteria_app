@@ -26,5 +26,5 @@ void _initSetCards(){
     ..registerFactory(() => ObtenerCards(cardApiRepository: serviceLocator()))
     //Bloc
     ..registerLazySingleton(() => SetBloc(obtenerDefaultSets: serviceLocator()))
-    ..registerLazySingleton(() => DeckBloc());
+    ..registerLazySingleton(() => DeckBloc(setBloc: serviceLocator()));
 }

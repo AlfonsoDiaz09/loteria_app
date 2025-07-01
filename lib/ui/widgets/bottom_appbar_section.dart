@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/main.dart';
+import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
+import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
 import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
 import 'package:loteria_app/ui/utils/dimention_size.dart';
@@ -28,6 +30,11 @@ class BottomAppbarSection extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
+                    final stateSet = context.read<SetBloc>().state as SetCargado;
+                    final shuffledCards = stateSet.cardSetLocal.cards.toList()..shuffle();
+                    context.read<DeckBloc>().add(ShuffleCards());
+                    context.read<DeckBloc>().add(InitializeDeck(cards: shuffledCards));
+                    
                     controller.reset();
                     context.read<TimerBloc>().add(ResetTimer(status: StatusTimer.initial));
                   },
@@ -86,7 +93,7 @@ class BottomAppbarSection extends StatelessWidget {
                   Icons.settings_rounded,
                   size: DimentionSize.width(24)),
               ],
-            ),
+            )
           ),
         );
       }

@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/data/set_cards/models/card_model.dart';
+import 'package:loteria_app/main.dart';
+import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
 
 part 'deck_event.dart';
 part 'deck_state.dart';
 
 class DeckBloc extends Bloc<DeckEvent, DeckState>{
+  final SetBloc _setBloc;
   static const int visibleLimit = 15;
 
-  DeckBloc() :super(DeckState.initial()) {
+  DeckBloc({
+    required SetBloc setBloc}) 
+    : _setBloc = setBloc,
+      super(DeckState.initial()) {
     on<DeckEvent>((event, emit) {
 
+    });
+
+    on<ShuffleCards>((event, emit) async {
+      final stateSetBloc = _setBloc.state;
+      if (stateSetBloc is! SetCargado) return;
+
+      final cardsShuffled = List<CardModel>.from(stateSetBloc.cardSetLocal.cards);
+
+      emit(
+        DeckState(
+          fullDeck: cardsShuffled,
+          visibleDeck: [],
+          isEmpty: true,
+          cardsPlayed: []));
     });
 
     on<InitializeDeck>((event, emit) {

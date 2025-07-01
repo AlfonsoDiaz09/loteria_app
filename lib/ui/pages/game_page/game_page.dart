@@ -52,8 +52,10 @@ class _GamePageState extends State<GamePage> {
                       listener: (context, state) {
                         final setState = state as SetCargado;
                         context.read<DeckBloc>().add(
-                          InitializeDeck(cards: setState.cardSetLocal.cards),
-                        );
+                          ShuffleCards());
+                        final shuffledCards = setState.cardSetLocal.cards.toList()..shuffle();
+                        context.read<DeckBloc>().add(
+                          InitializeDeck(cards: shuffledCards));
                       },
                       builder: (context, stateSet) {
                         if (stateSet is! SetCargado) return SizedBox.shrink();
