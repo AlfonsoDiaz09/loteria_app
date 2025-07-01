@@ -11,6 +11,7 @@ import 'package:loteria_app/ui/pages/game_page/widgets/progress_bar_timer.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
 import 'package:loteria_app/ui/utils/animated_out_controller.dart';
 import 'package:loteria_app/ui/utils/enums.dart';
+import 'package:loteria_app/ui/utils/loteria_speaker.dart';
 import 'package:loteria_app/ui/utils/progress_bar_controller.dart';
 import 'package:loteria_app/ui/widgets/bottom_appbar_section.dart';
 
@@ -61,6 +62,7 @@ class _GamePageState extends State<GamePage> {
                         if (stateSet is! SetCargado) return SizedBox.shrink();
                         return BlocBuilder<DeckBloc, DeckState>(
                           builder: (context, state) {
+                            final speaker = LoteriaSpeaker();
                             return state.visibleDeck.isEmpty
                               ? const Center(child: Text('Sin cartas'))
                               : CardsInPlay(
@@ -71,6 +73,7 @@ class _GamePageState extends State<GamePage> {
                                   onAnimationFinished: () {
                                     context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
                                     _progressController.start();
+                                    speaker.speak(state.visibleDeck[0].name);
                                   });
                           }
                         );
