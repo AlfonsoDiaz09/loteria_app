@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loteria_app/core/constants/api_settings.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
 import 'package:loteria_app/ui/utils/dimention_size.dart';
@@ -7,10 +8,12 @@ class CardLoteria extends StatelessWidget {
   const CardLoteria({
     super.key,
     required this.isSmallCard,
-    required this.imageUrl});
+    this.isCoverCard,
+    this.imageUrl});
 
   final bool isSmallCard;
-  final String imageUrl;
+  final bool? isCoverCard;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +41,19 @@ class CardLoteria extends StatelessWidget {
           isSmallCard ? 8 : 27),
         vertical: DimentionSize.height(
           isSmallCard ? 7 : 22)),
-      child: Image.network(
-        fullUrl,
+      child: SizedBox(
         width: DimentionSize.width(
-          isSmallCard ? 40 : 193),
+            isSmallCard ? 40 : 193),
         height: DimentionSize.height(
-          isSmallCard ? 64 : 226)),
+            isSmallCard ? 64 : 226),
+        child: isCoverCard == true
+            ? SvgPicture.asset(
+                'assets/img/card_diamond.svg',
+                fit: BoxFit.cover,
+              )
+            : Image.network(
+                fullUrl,
+                fit: BoxFit.cover)),
     );
   }
 }

@@ -30,7 +30,8 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
           fullDeck: cardsShuffled,
           visibleDeck: [],
           isEmpty: true,
-          cardsPlayed: []));
+          cardsPlayed: [],
+          hasCoverCard: true));
     });
 
     on<InitializeDeck>((event, emit) {
@@ -47,6 +48,10 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
     });
 
     on<PlayTopCard>((event, emit) {
+      if (state.hasCoverCard) {
+        emit(state.copyWith(hasCoverCard: false));
+        return;
+      }
       final current = List<CardModel>.from(state.visibleDeck);
       final full = state.fullDeck;
       final played = state.cardsPlayed;

@@ -68,6 +68,7 @@ class _GamePageState extends State<GamePage> {
                               : CardsInPlay(
                                   controller: _animatedOutController,
                                   cards: state.visibleDeck,
+                                  hasCoverCard: state.hasCoverCard,
                                   onCardPlayed: () => context.read<DeckBloc>()
                                       .add(PlayTopCard()),
                                   onAnimationFinished: () {
