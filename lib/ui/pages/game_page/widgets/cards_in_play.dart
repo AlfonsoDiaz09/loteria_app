@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/data/set_cards/models/card_model.dart';
+import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/card_loteria.dart';
 import 'package:loteria_app/ui/utils/animated_out_controller.dart';
+import 'package:loteria_app/ui/utils/loteria_speaker.dart';
 
 class CardsInPlay extends StatefulWidget {
   final List<CardModel> cards;
@@ -27,6 +30,7 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
   bool _isAnimating = false;
+  final speaker = LoteriaSpeaker();
 
   @override
   void initState() {
@@ -90,6 +94,11 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
                       opacity: 0,
                       child: _buildCard(widget.cards[i]),
                     ),
+                    onDragStarted: widget.cards.length == 1
+                      ? () {}
+                      : () {
+                          speaker.speak(widget.cards[i+1].name);
+                        },
                     onDragEnd: (_) => widget.onCardPlayed(),
                     child: _buildCard(widget.cards[i])
                   ),
@@ -107,6 +116,9 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
                     opacity: 0,
                     child: _buildCoverCard(true),
                   ),
+                  onDragStarted: () {
+                    speaker.speak(widget.cards[0].name);
+                  },
                   onDragEnd: (_) => widget.onCardPlayed(),
                   child: _buildCoverCard(true)
                 ),

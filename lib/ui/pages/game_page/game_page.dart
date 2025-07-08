@@ -74,7 +74,8 @@ class _GamePageState extends State<GamePage> {
                                   onAnimationFinished: () {
                                     context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
                                     _progressController.start();
-                                    speaker.speak(state.visibleDeck[0].name);
+                                    speaker.speak(state.visibleDeck[
+                                      state.hasCoverCard ? 0 : 1].name);
                                   });
                           }
                         );
