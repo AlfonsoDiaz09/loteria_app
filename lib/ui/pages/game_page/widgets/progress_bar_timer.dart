@@ -38,10 +38,8 @@ class _ProgressBarTimerState extends State<ProgressBarTimer> with SingleTickerPr
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         final statusDeckBloc = context.read<DeckBloc>().state;
-        if (statusDeckBloc.visibleDeck.isNotEmpty) {
+        if (statusDeckBloc.remainingCards > 0) {
           widget.animatedOutController.animateCardOut();
-        } else {
-          context.read<TimerBloc>().add(CompleteTimer(status: StatusTimer.completed));
         }
       }
     });

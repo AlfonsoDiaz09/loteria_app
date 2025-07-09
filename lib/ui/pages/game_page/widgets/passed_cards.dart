@@ -12,10 +12,6 @@ class PassedCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DeckBloc, DeckState>(
       builder: (context, state) {
-        final stateDeckBloc = context.read<DeckBloc>().state;
-        final numTotalCards = stateDeckBloc.fullDeck.length;
-        final numCardsPlayed = stateDeckBloc.cardsPlayed.length;
-        final remainingCards = numTotalCards - numCardsPlayed;
         return Container(
           margin: EdgeInsets.symmetric(
             horizontal: DimentionSize.width(7),
@@ -32,30 +28,31 @@ class PassedCards extends StatelessWidget {
                 },
                 separatorBuilder: (context, index) => SizedBox(
                   width: DimentionSize.width(10))),
-              Positioned(
-                right: 0, top: 0, bottom: 0,
-                child: Center(
-                  child: Container(
-                    width: DimentionSize.width(42),
-                    height: DimentionSize.height(31),
-                    decoration: BoxDecoration(
-                      color: AppTheme.secondary,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        bottomLeft: Radius.circular(18)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 4,
-                          offset: Offset(2, 2))]),
-                    child: Center(
-                      child: Text(
-                        '- $remainingCards',
-                        style: TextStyle(
-                          fontSize: DimentionSize.width(14),
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold))))),
-              ),
+              if (state.remainingCards != 0)
+                Positioned(
+                  right: 0, top: 0, bottom: 0,
+                  child: Center(
+                    child: Container(
+                      width: DimentionSize.width(42),
+                      height: DimentionSize.height(31),
+                      decoration: BoxDecoration(
+                        color: AppTheme.secondary,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(18),
+                          bottomLeft: Radius.circular(18)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 4,
+                            offset: Offset(2, 2))]),
+                      child: Center(
+                        child: Text(
+                          '- ${state.remainingCards}',
+                          style: TextStyle(
+                            fontSize: DimentionSize.width(14),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold))))),
+                ),
             ],
           ),
         );

@@ -31,7 +31,8 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
           visibleDeck: [],
           isEmpty: true,
           cardsPlayed: [],
-          hasCoverCard: true));
+          hasCoverCard: true,
+          remainingCards: 0));
     });
 
     on<InitializeDeck>((event, emit) {
@@ -39,17 +40,24 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
       final visible = fullDeck.length <= visibleLimit
           ? List<CardModel>.from(fullDeck)
           : fullDeck.sublist(fullDeck.length - visibleLimit);
+      final numerCards = state.cardsPlayed.isEmpty
+          ? fullDeck.length
+          : state.remainingCards;
 
       emit(
         state.copyWith(
         fullDeck: fullDeck,
         visibleDeck: visible,
-        isEmpty: visible.isEmpty));
+        isEmpty: visible.isEmpty,
+        remainingCards: numerCards));
     });
 
     on<PlayTopCard>((event, emit) {
+      final remainingCards = state.remainingCards - 1;
       if (state.hasCoverCard) {
-        emit(state.copyWith(hasCoverCard: false));
+        emit(state.copyWith(
+            hasCoverCard: false,
+            remainingCards: remainingCards));
         return;
       }
       final current = List<CardModel>.from(state.visibleDeck);
@@ -72,7 +80,8 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
         state.copyWith(
         visibleDeck: current,
         isEmpty: current.isEmpty,
-        cardsPlayed: played));
+        cardsPlayed: played,
+        remainingCards: remainingCards));
     });
   }
 }

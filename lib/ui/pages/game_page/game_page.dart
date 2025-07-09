@@ -72,8 +72,12 @@ class _GamePageState extends State<GamePage> {
                                   onCardPlayed: () => context.read<DeckBloc>()
                                       .add(PlayTopCard()),
                                   onAnimationFinished: () {
-                                    context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
-                                    if (state.visibleDeck.length > 1) _progressController.start();
+                                    if (state.remainingCards > 1) {
+                                      context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
+                                      _progressController.start();
+                                    } else {
+                                      context.read<TimerBloc>().add(StartTimer(status: StatusTimer.completed));
+                                    }
                                     speaker.speak(state.visibleDeck[
                                       state.hasCoverCard ? 0 : 1].name);
                                   });

@@ -82,7 +82,7 @@ class BottomAppbarSection extends StatelessWidget {
                           status == StatusTimer.running
                             ? Icons.pause_rounded
                             : status == StatusTimer.completed ||
-                              stateDeck.visibleDeck.isEmpty
+                              stateDeck.remainingCards == 0
                                 ? Icons.replay_rounded
                                 : Icons.play_arrow_rounded,
                           size: DimentionSize.width(32),
