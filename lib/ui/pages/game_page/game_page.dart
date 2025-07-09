@@ -10,6 +10,7 @@ import 'package:loteria_app/ui/pages/game_page/widgets/passed_cards.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/progress_bar_timer.dart';
 import 'package:loteria_app/ui/theme/app_theme.dart';
 import 'package:loteria_app/ui/utils/animated_out_controller.dart';
+import 'package:loteria_app/ui/utils/dimention_size.dart';
 import 'package:loteria_app/ui/utils/enums.dart';
 import 'package:loteria_app/ui/utils/loteria_speaker.dart';
 import 'package:loteria_app/ui/utils/progress_bar_controller.dart';
@@ -64,7 +65,12 @@ class _GamePageState extends State<GamePage> {
                           builder: (context, state) {
                             final speaker = LoteriaSpeaker();
                             return state.visibleDeck.isEmpty
-                              ? const Center(child: Text('Sin cartas'))
+                              ? Center(
+                                  child: Image.asset(
+                                    'assets/img/trophy.png',
+                                    width: DimentionSize.width(300),
+                                    fit: BoxFit.cover,
+                                  ))
                               : CardsInPlay(
                                   controller: _animatedOutController,
                                   cards: state.visibleDeck,
