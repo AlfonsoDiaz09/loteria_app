@@ -78,7 +78,7 @@ class _GamePageState extends State<GamePage> {
                                   onCardPlayed: () => context.read<DeckBloc>()
                                       .add(PlayTopCard()),
                                   onAnimationFinished: () {
-                                    if (state.remainingCards > 1) {
+                                    if (state.remainingCards > 0) {
                                       context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
                                       _progressController.start();
                                     } else {

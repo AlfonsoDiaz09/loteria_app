@@ -39,7 +39,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
       final fullDeck = List<CardModel>.from(event.cards);
       final visible = fullDeck.length <= visibleLimit
           ? List<CardModel>.from(fullDeck)
-          : fullDeck.sublist(fullDeck.length - visibleLimit);
+          : fullDeck.sublist(0, visibleLimit);
       final numerCards = state.cardsPlayed.isEmpty
           ? fullDeck.length
           : state.remainingCards;
@@ -65,12 +65,9 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
       final played = state.cardsPlayed;
 
       played.add(current[0]);
-
-      if (current.isEmpty || played.length >= full.length) return;
-
       current.removeAt(0);
 
-      final nextIndex = played.length + visibleLimit;
+      final nextIndex = played.length + visibleLimit - 1;
 
       if (nextIndex < full.length) {
         current.add(full[nextIndex]);

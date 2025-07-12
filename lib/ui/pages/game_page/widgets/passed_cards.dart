@@ -28,7 +28,7 @@ class PassedCards extends StatelessWidget {
                 },
                 separatorBuilder: (context, index) => SizedBox(
                   width: DimentionSize.width(10))),
-              if (state.remainingCards != 0)
+              if (state.remainingCards > 0)
                 Positioned(
                   right: 0, top: 0, bottom: 0,
                   child: Center(
