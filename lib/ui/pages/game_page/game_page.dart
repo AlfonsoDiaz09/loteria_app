@@ -64,29 +64,22 @@ class _GamePageState extends State<GamePage> {
                         return BlocBuilder<DeckBloc, DeckState>(
                           builder: (context, state) {
                             final speaker = LoteriaSpeaker();
-                            return state.visibleDeck.isEmpty
-                              ? Center(
-                                  child: Image.asset(
-                                    'assets/img/trophy.png',
-                                    width: DimentionSize.width(300),
-                                    fit: BoxFit.cover,
-                                  ))
-                              : CardsInPlay(
-                                  controller: _animatedOutController,
-                                  cards: state.visibleDeck,
-                                  hasCoverCard: state.hasCoverCard,
-                                  onCardPlayed: () => context.read<DeckBloc>()
-                                      .add(PlayTopCard()),
-                                  onAnimationFinished: () {
-                                    if (state.remainingCards > 0) {
-                                      context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
-                                      _progressController.start();
-                                    } else {
-                                      context.read<TimerBloc>().add(StartTimer(status: StatusTimer.completed));
-                                    }
-                                    speaker.speak(state.visibleDeck[
-                                      state.hasCoverCard ? 0 : 1].name);
-                                  });
+                            return CardsInPlay(
+                              controller: _animatedOutController,
+                              cards: state.visibleDeck,
+                              hasCoverCard: state.hasCoverCard,
+                              onCardPlayed: () => context.read<DeckBloc>()
+                                  .add(PlayTopCard()),
+                              onAnimationFinished: () {
+                                if (state.remainingCards > 0) {
+                                  context.read<TimerBloc>().add(StartTimer(status: StatusTimer.running));
+                                  _progressController.start();
+                                } else {
+                                  context.read<TimerBloc>().add(StartTimer(status: StatusTimer.completed));
+                                }
+                                speaker.speak(state.visibleDeck[
+                                  state.hasCoverCard ? 0 : 1].name);
+                              });
                           }
                         );
                       }

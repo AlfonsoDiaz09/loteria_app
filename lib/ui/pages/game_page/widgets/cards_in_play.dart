@@ -4,6 +4,7 @@ import 'package:loteria_app/data/set_cards/models/card_model.dart';
 import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
 import 'package:loteria_app/ui/pages/game_page/widgets/card_loteria.dart';
 import 'package:loteria_app/ui/utils/animated_out_controller.dart';
+import 'package:loteria_app/ui/utils/dimention_size.dart';
 import 'package:loteria_app/ui/utils/loteria_speaker.dart';
 
 class CardsInPlay extends StatefulWidget {
@@ -81,6 +82,12 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
       alignment: Alignment.center,
       clipBehavior: Clip.none,
       children: [
+        Center(
+          child: Image.asset(
+            'assets/img/trophy.png',
+            width: DimentionSize.width(300),
+            fit: BoxFit.cover,
+          )),
         for (int i = widget.cards.length - 1; i >= 0; i--)
           Positioned(
             top: i * 1,
