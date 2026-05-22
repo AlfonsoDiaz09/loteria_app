@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Ping Supabase
         run: |
-          curl "${{ secrets.API_SUPABASE_URL }}/rest/v1/cards?select=id&limit=1" \
-          -H "apikey: ${{ secrets.API_KEY }}" \
-          -H "Authorization: Bearer ${{ secrets.API_KEY }}"
+          for i in {1..30}
+          do
+            echo "Request #$i"
+            curl "${{ secrets.API_SUPABASE_URL }}/rest/v1/cards?select=id&limit=1" \
+            -H "apikey: ${{ secrets.API_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.API_KEY }}"
+            
+            sleep 2
+          done
