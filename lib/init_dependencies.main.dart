@@ -22,7 +22,7 @@ void _initSetCards(){
     ..registerFactory<SetApiRepository>(() => SetApiRepositoryImpl(client: serviceLocator(), apiSettings: serviceLocator()))
     ..registerFactory<CardApiRepository>(() => CardApiRepositoryImpl(apiSettings: serviceLocator(), client: serviceLocator()))
     //Usecase
-    ..registerFactory(() => ObtenerDefaultSets(setApiRepository: serviceLocator(), cardApiRepository: serviceLocator()))
+    ..registerFactory(() => ObtenerDefaultSets(setApiRepository: serviceLocator(), cardApiRepository: serviceLocator(), apiSettings: serviceLocator()))
     ..registerFactory(() => ObtenerCards(cardApiRepository: serviceLocator()))
     //Bloc
     ..registerLazySingleton(() => SetBloc(obtenerDefaultSets: serviceLocator()))

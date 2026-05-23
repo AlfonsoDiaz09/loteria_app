@@ -5,18 +5,21 @@ class ApiSettings {
   final String apiKey;
   final String apiSupabaseUrl;
   final String storageImageUrl;
+  final String defaultSetId;
 
   ApiSettings({
     required this.version,
     required this.apiKey,
     required this.apiSupabaseUrl,
-    required this.storageImageUrl});
+    required this.storageImageUrl,
+    required this.defaultSetId});
 
   factory ApiSettings.fromEnv() {
     return ApiSettings(
       version: dotenv.env['VERSION'] ?? 'VERSION not found',
       apiKey: dotenv.env['API_KEY'] ?? 'API_KEY not found',
       apiSupabaseUrl: dotenv.env['API_SUPABASE_URL'] ?? 'API_SUPABASE_URL not found',
-      storageImageUrl: dotenv.env['STORAGE_IMAGE_URL'] ?? 'STORAGE_IMAGE_URL not found');
+      storageImageUrl: dotenv.env['STORAGE_IMAGE_URL'] ?? 'STORAGE_IMAGE_URL not found',
+      defaultSetId: dotenv.env['DEFAULT_SET_ID'] ?? 'DEFAULT_SET_ID not found');
   }
 }
