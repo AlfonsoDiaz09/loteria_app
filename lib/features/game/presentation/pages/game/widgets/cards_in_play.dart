@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/data/set_cards/models/card_model.dart';
-import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
-import 'package:loteria_app/ui/pages/game_page/widgets/card_loteria.dart';
-import 'package:loteria_app/ui/utils/animated_out_controller.dart';
-import 'package:loteria_app/ui/utils/dimention_size.dart';
-import 'package:loteria_app/ui/utils/loteria_speaker.dart';
+import 'package:loteria_app/shared/controllers/animated_out_controller.dart';
+import 'package:loteria_app/shared/utils/dimention_size.dart';
+import 'package:loteria_app/core/services/loteria_speaker.dart';
+
+import 'card_loteria.dart';
 
 class CardsInPlay extends StatefulWidget {
   final List<CardModel> cards;

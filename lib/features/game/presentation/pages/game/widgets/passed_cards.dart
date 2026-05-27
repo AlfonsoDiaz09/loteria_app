@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
-import 'package:loteria_app/ui/pages/game_page/widgets/card_loteria.dart';
-import 'package:loteria_app/ui/theme/app_theme.dart';
-import 'package:loteria_app/ui/utils/dimention_size.dart';
+import 'package:loteria_app/features/game/presentation/bloc/deck/deck_bloc.dart';
+import 'package:loteria_app/app/theme/app_theme.dart';
+import 'package:loteria_app/shared/utils/dimention_size.dart';
+
+import 'card_loteria.dart';
 
 class PassedCards extends StatelessWidget {
   const PassedCards({super.key});

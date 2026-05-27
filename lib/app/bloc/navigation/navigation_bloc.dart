@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/main.dart';
-import 'package:loteria_app/ui/router/router.dart';
+import 'package:loteria_app/app/router/router.dart';
 
 part 'navigation_state.dart';
 part 'navigation_event.dart';

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loteria_app/main.dart';
-import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
-import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
-import 'package:loteria_app/ui/theme/app_theme.dart';
-import 'package:loteria_app/ui/utils/animated_out_controller.dart';
-import 'package:loteria_app/ui/utils/enums.dart';
-import 'package:loteria_app/ui/utils/progress_bar_controller.dart';
+import 'package:loteria_app/features/game/presentation/bloc/deck/deck_bloc.dart';
+import 'package:loteria_app/features/game/presentation/bloc/timer/timer_bloc.dart';
+import 'package:loteria_app/app/theme/app_theme.dart';
+import 'package:loteria_app/shared/controllers/animated_out_controller.dart';
+import 'package:loteria_app/shared/controllers/progress_bar_controller.dart';
 
 class ProgressBarTimer extends StatefulWidget {
   const ProgressBarTimer({

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loteria_app/data/set_cards/models/card_model.dart';
-import 'package:loteria_app/main.dart';
-import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
+import 'package:loteria_app/features/set/presentation/bloc/set/set_bloc.dart';
 
 part 'deck_event.dart';
 part 'deck_state.dart';

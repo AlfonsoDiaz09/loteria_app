@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loteria_app/core/enums/status_timer_enum.dart';
 import 'package:loteria_app/main.dart';
-import 'package:loteria_app/ui/utils/enums.dart';
 
 part 'timer_state.dart';
 part 'timer_event.dart';
@@ -16,7 +16,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState>{
       var duration = event.duration;
       if (duration == null) {
         // TODO: Crear modelo y recuperar la duración
-        duration = 5;
+        duration = 2;
         print("duration: $duration");
       } else {
         duration = (duration < 60) ? duration + 1 : 1;

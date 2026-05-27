@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:loteria_app/ui/bloc/navigation/navigation_bloc.dart';
-import 'package:loteria_app/ui/pages/game_page/game_page.dart';
+import 'package:loteria_app/app/bloc/navigation/navigation_bloc.dart';
+import 'package:loteria_app/features/game/presentation/pages/game/game_page.dart';
 
 final GlobalKey<NavigatorState>navigatorKey = GlobalKey();
 

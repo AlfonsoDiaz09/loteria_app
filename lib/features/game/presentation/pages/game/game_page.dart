@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loteria_app/main.dart';
-import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
-import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
-import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
-import 'package:loteria_app/ui/pages/game_page/widgets/cards_in_play.dart';
-import 'package:loteria_app/ui/pages/game_page/widgets/passed_cards.dart';
-import 'package:loteria_app/ui/pages/game_page/widgets/progress_bar_timer.dart';
-import 'package:loteria_app/ui/theme/app_theme.dart';
-import 'package:loteria_app/ui/utils/animated_out_controller.dart';
-import 'package:loteria_app/ui/utils/dimention_size.dart';
-import 'package:loteria_app/ui/utils/enums.dart';
-import 'package:loteria_app/ui/utils/loteria_speaker.dart';
-import 'package:loteria_app/ui/utils/progress_bar_controller.dart';
-import 'package:loteria_app/ui/widgets/bottom_appbar_section.dart';
+import 'package:loteria_app/core/enums/status_timer_enum.dart';
+import 'package:loteria_app/features/game/presentation/pages/game/widgets/cards_in_play.dart';
+import 'package:loteria_app/features/game/presentation/pages/game/widgets/passed_cards.dart';
+import 'package:loteria_app/features/game/presentation/pages/game/widgets/progress_bar_timer.dart';
+import 'package:loteria_app/features/game/presentation/bloc/deck/deck_bloc.dart';
+import 'package:loteria_app/features/game/presentation/bloc/timer/timer_bloc.dart';
+import 'package:loteria_app/features/set/presentation/bloc/set/set_bloc.dart';
+import 'package:loteria_app/app/theme/app_theme.dart';
+import 'package:loteria_app/shared/controllers/animated_out_controller.dart';
+import 'package:loteria_app/core/services/loteria_speaker.dart';
+import 'package:loteria_app/shared/controllers/progress_bar_controller.dart';
+import 'package:loteria_app/shared/widgets/bottom_nav/bottom_appbar_section.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});

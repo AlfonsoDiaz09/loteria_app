@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loteria_app/core/constants/api_settings.dart';
-import 'package:loteria_app/ui/theme/app_theme.dart';
-import 'package:loteria_app/ui/utils/dimention_size.dart';
+import 'package:loteria_app/app/theme/app_theme.dart';
+import 'package:loteria_app/shared/utils/dimention_size.dart';
 
 class CardLoteria extends StatelessWidget {
   const CardLoteria({
