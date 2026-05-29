@@ -6,7 +6,7 @@ sealed class SetState {}
 final class SetInitial extends SetState {}
 
 final class SetCargado extends SetState {
-  final CardSetLocal cardSetLocal;
+  final SetWithCardsEntity cardSetLocal;
 
   SetCargado({required this.cardSetLocal});
 }

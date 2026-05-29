@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loteria_app/data/set_cards/models/card_model.dart';
+import 'package:loteria_app/features/card/domain/entities/card_entity.dart';
 import 'package:loteria_app/shared/controllers/animated_out_controller.dart';
 import 'package:loteria_app/shared/utils/dimention_size.dart';
 import 'package:loteria_app/core/services/loteria_speaker.dart';
@@ -7,7 +7,7 @@ import 'package:loteria_app/core/services/loteria_speaker.dart';
 import 'card_loteria.dart';
 
 class CardsInPlay extends StatefulWidget {
-  final List<CardModel> cards;
+  final List<CardEntity> cards;
   final VoidCallback onCardPlayed;
   final AnimatedOutController controller;
   final VoidCallback onAnimationFinished;
@@ -71,7 +71,7 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
     return CardLoteria(isSmallCard: false, isCoverCard: isCover);
   }
 
-  Widget _buildCard(CardModel card, {bool isDragging = false}) {
+  Widget _buildCard(CardEntity card, {bool isDragging = false}) {
     return CardLoteria(isSmallCard: false, imageUrl: card.imageUrl);
   }
 
@@ -93,7 +93,7 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
             child: i == 0 && !widget.hasCoverCard
               ? SlideTransition(
                 position: _slideAnimation,
-                child: Draggable<CardModel>(
+                child: Draggable<CardEntity>(
                     data: widget.cards[i],
                     feedback: _buildCard(widget.cards[i], isDragging: true),
                     childWhenDragging: Opacity(
@@ -116,7 +116,7 @@ class _CardsInPlayState extends State<CardsInPlay> with SingleTickerProviderStat
             top: -1,
             child: SlideTransition(
               position: _slideAnimation,
-              child: Draggable<CardModel>(
+              child: Draggable<CardEntity>(
                   feedback: _buildCoverCard(true),
                   childWhenDragging: Opacity(
                     opacity: 0,

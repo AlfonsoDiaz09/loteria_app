@@ -1,10 +1,10 @@
 part of 'deck_bloc.dart';
 
 class DeckState {
-  final List<CardModel> fullDeck;
-  final List<CardModel> visibleDeck;
+  final List<CardEntity> fullDeck;
+  final List<CardEntity> visibleDeck;
   final bool isEmpty;
-  final List<CardModel> cardsPlayed;
+  final List<CardEntity> cardsPlayed;
   final bool hasCoverCard;
   final int remainingCards;
 
@@ -18,10 +18,10 @@ class DeckState {
   });
 
   DeckState copyWith({
-    List<CardModel>? fullDeck,
-    List<CardModel>? visibleDeck,
+    List<CardEntity>? fullDeck,
+    List<CardEntity>? visibleDeck,
     bool? isEmpty,
-    List<CardModel>? cardsPlayed,
+    List<CardEntity>? cardsPlayed,
     bool? hasCoverCard,
     int? remainingCards,
   }) {

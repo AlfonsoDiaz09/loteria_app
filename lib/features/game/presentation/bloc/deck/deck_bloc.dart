@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loteria_app/data/set_cards/models/card_model.dart';
+import 'package:loteria_app/features/card/domain/entities/card_entity.dart';
 import 'package:loteria_app/features/set/presentation/bloc/set/set_bloc.dart';
 
 part 'deck_event.dart';
@@ -22,7 +22,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
       final stateSetBloc = _setBloc.state;
       if (stateSetBloc is! SetCargado) return;
 
-      final cardsShuffled = List<CardModel>.from(stateSetBloc.cardSetLocal.cards);
+      final cardsShuffled = List<CardEntity>.from(stateSetBloc.cardSetLocal.cards);
 
       emit(
         DeckState(
@@ -35,9 +35,9 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
     });
 
     on<InitializeDeck>((event, emit) {
-      final fullDeck = List<CardModel>.from(event.cards);
+      final fullDeck = List<CardEntity>.from(event.cards);
       final visible = fullDeck.length <= visibleLimit
-          ? List<CardModel>.from(fullDeck)
+          ? List<CardEntity>.from(fullDeck)
           : fullDeck.sublist(0, visibleLimit);
       final numerCards = state.cardsPlayed.isEmpty
           ? fullDeck.length
@@ -59,7 +59,7 @@ class DeckBloc extends Bloc<DeckEvent, DeckState>{
             remainingCards: remainingCards));
         return;
       }
-      final current = List<CardModel>.from(state.visibleDeck);
+      final current = List<CardEntity>.from(state.visibleDeck);
       final full = state.fullDeck;
       final played = state.cardsPlayed;
 

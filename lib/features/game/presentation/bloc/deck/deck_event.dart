@@ -6,7 +6,7 @@ sealed class DeckEvent {}
 class ShuffleCards extends DeckEvent { }
 
 class InitializeDeck extends DeckEvent {
-  final List<CardModel> cards;
+  final List<CardEntity> cards;
 
   InitializeDeck({required this.cards});
 }
