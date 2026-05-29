@@ -19,13 +19,13 @@ class SetModel {
     required this.isDefault,
   });
 
-  factory SetModel.fromJson(Map<String, dynamic> json) => 
-    SetModel(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      sesionId: json['sesion_id'],
-      isDefault: BoolUtils().fromJson(json['is_default']));
+  factory SetModel.fromJson(Map<String, dynamic> json) =>
+      SetModel(
+          id: json['id'],
+          name: json['name'],
+          description: json['description'],
+          sesionId: json['sesion_id'],
+          isDefault: BoolUtils().fromJson(json['is_default']));
 
   Map<String,dynamic> toJson() => {
     "id":id,
