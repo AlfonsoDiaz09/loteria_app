@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:loteria_app/core/constants/api_settings.dart';
 import 'package:loteria_app/core/logs/logger_output.dart';
 import 'package:loteria_app/core/manager/client_manager.dart';
+import 'package:loteria_app/features/card/presentation/bloc/card/card_bloc.dart';
 import 'package:loteria_app/init_dependencies.dart';
 import 'package:loteria_app/features/game/presentation/bloc/deck/deck_bloc.dart';
 import 'package:loteria_app/app/bloc/navigation/navigation_bloc.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (_) => serviceLocator<NavigationBloc>()),
             BlocProvider(create: (_) => serviceLocator<TimerBloc>()),
+            BlocProvider(create: (_) => serviceLocator<CardBloc>()),
             BlocProvider(create: (_) => serviceLocator<SetBloc>()),
             BlocProvider(create: (_) => serviceLocator<DeckBloc>()),
           ],
