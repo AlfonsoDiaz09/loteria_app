@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:loteria_app/main.dart';
 
 class ClientManager {
   static final ClientManager _instance = ClientManager._internal();
@@ -17,32 +17,95 @@ class ClientManager {
     _token = token;
   }
 
-  Future<http.Response> get(Uri url, {Map<String, String>? headers}) async {
+  /// 🔥 HEADERS CENTRALIZADOS
+  Map<String, String> _buildHeaders(Map<String, String>? headers) {
     final requestHeaders = {
+      'Content-Type': 'application/json',
       ...?headers,
-      'Content-type': 'application/json'
     };
 
     if (_token != null && _token!.isNotEmpty) {
       requestHeaders['Authorization'] = 'Bearer $_token';
-      requestHeaders['apiKey'] = _token!;
+      requestHeaders['apiKey'] = _token!; // Supabase
     }
-    return _client.get(url, headers: requestHeaders);
+
+    return requestHeaders;
   }
 
-  Future<http.Response> post(Uri url, {Map<String, String>? headers, Object? body}) async {
-    final requestHeaders = {
-      ...?headers,
-      'Content-type': 'application/json'
-    };
-
-    if (_token != null && _token!.isNotEmpty) {
-      requestHeaders['Authorization'] = 'Bearer $_token';
+  /// 🔥 MANEJO DE RESPUESTA
+  http.Response _handleResponse(http.Response response) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return response;
+    } else {
+      throw HttpException(
+        'Error ${response.statusCode}: ${response.body}',
+      );
     }
-    return _client.post(
+  }
+
+  /// GET
+  Future<http.Response> get(
+      Uri url, {
+        Map<String, String>? headers,
+      }) async {
+    final response = await _client.get(
       url,
-      headers: requestHeaders,
-      body: body,
+      headers: _buildHeaders(headers),
     );
+
+    return _handleResponse(response);
   }
+
+  /// POST
+  Future<http.Response> post(
+      Uri url, {
+        Map<String, String>? headers,
+        Object? body,
+      }) async {
+    final response = await _client.post(
+      url,
+      headers: _buildHeaders(headers),
+      body: body != null ? jsonEncode(body) : null,
+    );
+
+    return _handleResponse(response);
+  }
+
+  /// PATCH
+  Future<http.Response> patch(
+      Uri url, {
+        Map<String, String>? headers,
+        Object? body,
+      }) async {
+    final response = await _client.patch(
+      url,
+      headers: _buildHeaders(headers),
+      body: body != null ? jsonEncode(body) : null,
+    );
+
+    return _handleResponse(response);
+  }
+
+  /// DELETE
+  Future<http.Response> delete(
+      Uri url, {
+        Map<String, String>? headers,
+      }) async {
+    final response = await _client.delete(
+      url,
+      headers: _buildHeaders(headers),
+    );
+
+    return _handleResponse(response);
+  }
+}
+
+/// EXCEPCIÓN PERSONALIZADA
+class HttpException implements Exception {
+  final String message;
+
+  HttpException(this.message);
+
+  @override
+  String toString() => message;
 }

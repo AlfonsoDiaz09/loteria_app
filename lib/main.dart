@@ -5,15 +5,17 @@ import 'package:go_router/go_router.dart';
 import 'package:loteria_app/core/constants/api_settings.dart';
 import 'package:loteria_app/core/logs/logger_output.dart';
 import 'package:loteria_app/core/manager/client_manager.dart';
+import 'package:loteria_app/features/card/presentation/bloc/card/card_bloc.dart';
 import 'package:loteria_app/init_dependencies.dart';
-import 'package:loteria_app/ui/bloc/deck/deck_bloc.dart';
-import 'package:loteria_app/ui/bloc/navigation/navigation_bloc.dart';
+import 'package:loteria_app/features/game/presentation/bloc/deck/deck_bloc.dart';
+import 'package:loteria_app/app/bloc/navigation/navigation_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:loteria_app/ui/bloc/set/set_bloc.dart';
-import 'package:loteria_app/ui/bloc/timer/timer_bloc.dart';
-import 'package:loteria_app/ui/router/router.dart';
-import 'package:loteria_app/ui/theme/app_theme.dart';
-import 'package:loteria_app/ui/utils/dimention_size.dart';
+import 'package:loteria_app/features/game/presentation/bloc/timer/timer_bloc.dart';
+import 'package:loteria_app/app/router/router.dart';
+import 'package:loteria_app/app/theme/app_theme.dart';
+import 'package:loteria_app/shared/utils/dimention_size.dart';
+
+import 'features/set/presentation/bloc/set/set_bloc.dart';
 
 var logger = LoggerOutput().logger;
 
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (_) => serviceLocator<NavigationBloc>()),
             BlocProvider(create: (_) => serviceLocator<TimerBloc>()),
+            BlocProvider(create: (_) => serviceLocator<CardBloc>()),
             BlocProvider(create: (_) => serviceLocator<SetBloc>()),
             BlocProvider(create: (_) => serviceLocator<DeckBloc>()),
           ],
